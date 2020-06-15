@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
 
     // https://developer.android.com/jetpack/androidx/releases/constraintlayout
-    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta6"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta7"
 
     // https://square.github.io/leakcanary/changelog/
     debugImplementation "com.squareup.leakcanary:leakcanary-android:2.3"

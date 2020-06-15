@@ -3,7 +3,7 @@ MotionLayout keeps track of any nested scrollable view in its mScrollTarget fiel
 This causes a memory leak when that view has a different lifecycle than the MotionLayout.
 For example: a NestedScrollView is inside a Fragment that gets removed from the MotionLayout.
 
-This happens with MotionLayout 2.0.0-beta5 and 2.0.0-beta6. It did not happen in 2.0.0-beta4.
+This happens with MotionLayout 2.0.0-beta5, 2.0.0-beta6 and *2.0.0-beta7*. It did not happen in 2.0.0-beta4.
 
 To reproduce:
 - Start the app
@@ -15,8 +15,8 @@ To reproduce:
 Leak Canary detects the following leak:
 
 ```
-hprof: heap dump "/data/user/0/be.norio.sandbox.motionlayoutleak/files/leakcanary/2020-06-09_10-17-20_653.hprof" starting...
-hprof: heap dump completed (15MB) in 598.151ms objects 238754 objects with stack traces 0
+hprof: heap dump "/data/user/0/be.norio.sandbox.motionlayoutleak/files/leakcanary/2020-06-15_10-21-02_146.hprof" starting...
+hprof: heap dump completed (15MB) in 632.111ms objects 238748 objects with stack traces 0
 Analysis in progress, working on: PARSING_HEAP_DUMP
 Analysis in progress, working on: EXTRACTING_METADATA
 Analysis in progress, working on: FINDING_RETAINED_OBJECTS
@@ -34,7 +34,7 @@ HEAP ANALYSIS RESULT
 1 APPLICATION LEAKS
 References underlined with "~~~" are likely causes.
 Learn more at https://squ.re/leaks.
-2514 bytes retained by leaking objects
+2478 bytes retained by leaking objects
 Signature: 1ac98bd3de32512986d7573ad8bd69aaaf51c7c8
 ┬───
 │ GC Root: System class
@@ -100,9 +100,9 @@ Signature: 1ac98bd3de32512986d7573ad8bd69aaaf51c7c8
 │    ↓ NestedScrollView.mParent
 ╰→ android.widget.FrameLayout instance
 ​     Leaking: YES (ObjectWatcher was watching this because be.norio.sandbox.motionlayoutleak.FragmentTwo received Fragment#onDestroyView() callback (references to its views should be cleared to prevent leaks))
-​     key = 59fe2c5f-bba9-40d9-8fc5-b5372018ba6e
-​     watchDurationMillis = 6955
-​     retainedDurationMillis = 1914
+​     key = c6cfcd15-f899-46ea-8079-220c8f3ad68f
+​     watchDurationMillis = 8219
+​     retainedDurationMillis = 3181
 ​     mContext instance of be.norio.sandbox.motionlayoutleak.MainActivity with mDestroyed = false
 ​     View#mParent is null
 ​     View#mAttachInfo is null (view detached)
@@ -118,8 +118,9 @@ Build.VERSION.SDK_INT: 29
 Build.MANUFACTURER: Google
 LeakCanary version: 2.3
 App process name: be.norio.sandbox.motionlayoutleak
-Analysis duration: 2356 ms
-Heap dump file path: /data/user/0/be.norio.sandbox.motionlayoutleak/files/leakcanary/2020-06-09_10-17-20_653.hprof
-Heap dump timestamp: 1591690643646
+Analysis duration: 5423 ms
+Heap dump file path: /data/user/0/be.norio.sandbox.motionlayoutleak/files/leakcanary/2020-06-15_10-21-02_146.hprof
+Heap dump timestamp: 1592209268241
 ====================================
+
 ```
